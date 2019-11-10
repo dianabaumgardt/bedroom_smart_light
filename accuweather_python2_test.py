@@ -5,22 +5,11 @@ import json, re, sys, argparse, os
 import time
 from datetime import datetime
 
-#os.environ["ACW_API_KEY"] = "dDbV6PqtGmwn5yH1QiA4KIssgusvmS8x"
-
 cur_path = os.path.dirname(__file__)
 
 new_path = os.path.relpath('credentials/creds.txt', cur_path)
 f = open(new_path, 'r')
 API_KEY = f.read()
-
-print API_KEY
-
-#if "ACW_API_KEY" in os.environ:
- #   API_KEY = os.environ['ACW_API_KEY']
-#else:
- #   if API_KEY == []:
-  #    sys.exit("No API key found")
-
 
 def getJSONfromUrl(url):
     response = requests.get(url)

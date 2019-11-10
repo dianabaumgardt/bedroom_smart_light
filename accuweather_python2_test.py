@@ -1,17 +1,24 @@
-# attribution - https://www.codeastar.com/easy-accuweather-forecast-in-python/
-
 import requests
 import json, re, sys, argparse, os
 import time
 from datetime import datetime
 
-cur_path = os.path.dirname(__file__)
 
+
+# Build up a root path to the creds.txt file in the credentials folder
+cur_path = os.path.dirname(__file__)
 new_path = os.path.relpath('credentials/creds.txt', cur_path)
+
+# open the creds.txt file and read out the API_KEY
 f = open(new_path, 'r')
 API_KEY = f.read()
+
+# Accuweather locationid - 339529 is for River Edge, NJ
 location = "339529"
 
+
+
+# method for hitting a get endpoint and returning json object
 def getJSONfromUrl(url):
     response = requests.get(url)
     json_data = json.loads(response.text)
@@ -22,15 +29,6 @@ def getCurrentConditions():
     json_data = getJSONfromUrl(url)
     if json_data == []:
         sys.exit("No location found for '{location}' from AccuWeather API")
-    else:
-        for p in json_data:
-            current_weather=p["WeatherText"]
-            current_temp=p["Temperature"]["Metric"]["Value"]
-            current_realfeel_temp=p["RealFeelTemperature"]["Metric"]["Value"]
-            current_conditions=p["WeatherText"]
-            wind_speed=p["Wind"]["Speed"]["Metric"]["Value"]
-
-    print "Current temperature: ", current_temp
     return json_data
 
 
@@ -39,11 +37,13 @@ def get1DayForecast():
     json_data = getJSONfromUrl(url)
     if json_data == []:
         sys.exit("No location found for '{location}' from AccuWeather API")
+    return json_data
 
+
+# Main logic
 start_time = datetime.now()
 current_hour = start_time.hour
-current_hour -= 1
-print "Current hour: ", current_hour
+current_hour -= 1 # set this for the first loop to force an API update
 
 while True:
     now = datetime.now()

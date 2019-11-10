@@ -10,6 +10,7 @@ cur_path = os.path.dirname(__file__)
 new_path = os.path.relpath('credentials/creds.txt', cur_path)
 f = open(new_path, 'r')
 API_KEY = f.read()
+location = "339529"
 
 def getJSONfromUrl(url):
     response = requests.get(url)
@@ -17,7 +18,7 @@ def getJSONfromUrl(url):
     return json_data
 
 def getCurrentConditions():
-    url = "http://dataservice.accuweather.com/currentconditions/v1/339529?apikey=dDbV6PqtGmwn5yH1QiA4KIssgusvmS8x&details=true"
+    url = "http://dataservice.accuweather.com/currentconditions/v1/" + location + "?apikey=" + API_KEY + "&details=true"
     json_data = getJSONfromUrl(url)
     if json_data == []:
         sys.exit("No location found for '{location}' from AccuWeather API")
@@ -34,7 +35,7 @@ def getCurrentConditions():
 
 
 def get1DayForecast():
-    url = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/339529?apikey=dDbV6PqtGmwn5yH1QiA4KIssgusvmS8x&details=true&metric=true"
+    url = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/" + location + "?apikey=" API_KEY "&details=true&metric=true"
     json_data = getJSONfromUrl(url)
     if json_data == []:
         sys.exit("No location found for '{location}' from AccuWeather API")

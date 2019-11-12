@@ -33,7 +33,7 @@ def getCurrentConditions():
 
 
 def get1DayForecast():
-    url = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/" + location + "?apikey=" API_KEY "&details=true&metric=true"
+    url = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/" + location + "?apikey=" + API_KEY + "&details=true&metric=true"
     json_data = getJSONfromUrl(url)
     if json_data == []:
         sys.exit("No location found for '{location}' from AccuWeather API")
@@ -50,7 +50,119 @@ while True:
     if now.hour != current_hour:
         current_hour = now.hour
         parsed_json = getCurrentConditions()
-        print "Current Conditions: ", parsed_json[0]['WeatherText']
-        print "Current Temp: ", parsed_json[0]['Temperature']['Metric']['Value']
-        print "Current Wind: ", parsed_json[0]['Wind']['Speed']['Metric']['Value']
+        current_temp = parsed_json[0]['Temperature']['Metric']['Value']
+
+        if current_temp < -15:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 147, 240, 250)
+            uh.show()
+
+        if current_temp < -10:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 102, 235, 250)
+            uh.show()
+        if current_temp < -5 :
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 45, 232, 252)
+            uh.show()
+
+        if current_temp < 0:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 7, 226, 250)
+            uh.show()
+
+        if current_temp < 5:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 7, 250, 230)
+            uh.show()
+        if current_temp < 10:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 116, 247, 223)
+            uh.show()
+
+        if current_temp < 15:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 127, 250, 209)
+            uh.show()
+
+        if current_temp < 20:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 5, 247, 167)
+            uh.show()
+        if current_temp < 25:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 247, 247, 5)
+            uh.show()
+
+        if current_temp < 30:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 247, 199, 5)
+            uh.show()
+
+        if current_temp < 35:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 247, 134, 5)
+            uh.show()
+        if current_temp < 40:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 247, 53, 5)
+            uh.show()
+        if current_temp >= 40:
+            uh.clear()
+            uh.show()
+
+            for x in range(8):
+                for y in range(4):
+                    uh.set_pixel(x, y, 247, 5, 5)
+            uh.show()
+
+
     time.sleep(60)
